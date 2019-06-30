@@ -20,10 +20,16 @@ public class Echoer extends Thread {
             PrintWriter writer = new PrintWriter(socket.getOutputStream(),true);
             while (true){
                 String echo = reader.readLine();
+                System.out.println("Recived From Client : "+echo);
                 if (echo.equals("exit")){
                     break;
                 }
-                writer.println(echo);
+                try {
+                    Thread.sleep(15*1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                writer.println(echo+" From Server");
             }
         }catch (IOException e){
             System.out.println(e.getMessage());
